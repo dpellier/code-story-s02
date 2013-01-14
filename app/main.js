@@ -28,5 +28,5 @@ app.get("/", function(req, res) {
     res.end(a);
 });
 
-app.listen(4595, "127.0.0.1");
+app.listen(process.env.PORT);
 console.log("Server running");
