@@ -22,8 +22,8 @@ app.get("/", function(req, res) {
     var a = answer(q, req, res);
     
     console.log("New request received - " + new Date().toTimeString());
-    console.log("Question : \"" + q);
-    console.log("Answer : \"" + a);
+    console.log("Question : " + q);
+    console.log("Answer : " + a);
     
     res.end(a);
 });
