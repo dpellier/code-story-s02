@@ -1,4 +1,9 @@
 {
-  "name" : "barebones",
-  "version" : "0.0.0"
+    "name" : "code-story-2",
+    "version" : "0.0.1",
+    "author": "Damien Pellier dpellier@gmail.com",
+    "description": "Application for the code story challenge 2013",
+    "dependencies" : {
+        "express": "latest"
+    }
 }
