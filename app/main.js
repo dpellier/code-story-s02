@@ -14,7 +14,7 @@ var answer = function(question, req, res) {
 var app = express.createServer();
 app.use(express.cookieParser());
 app.use(express.session({
-    "secret": "bodilpwnz"
+    "secret": "my little secret"
 }));
 
 app.get("/", function(req, res) {
@@ -28,5 +28,5 @@ app.get("/", function(req, res) {
     res.end(a);
 });
 
-app.listen(1337, "0.0.0.0");
-console.log("Server running on http://0.0.0.0:1337/");
+app.listen(8080, "code-story-2.dpellier.cloudbees.net");
+console.log("Server running");
