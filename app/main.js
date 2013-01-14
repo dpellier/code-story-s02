@@ -28,5 +28,5 @@ app.get("/", function(req, res) {
     res.end(a);
 });
 
-app.listen(8085, "code-story-2.dpellier.cloudbees.net");
+app.listen(80, "code-story-2.dpellier.cloudbees.net");
 console.log("Server running");
