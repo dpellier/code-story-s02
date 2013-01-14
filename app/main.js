@@ -11,7 +11,7 @@ var answer = function(question, req, res) {
     }
 };
 
-var app = express.createServer();
+var app = express();
 app.use(express.cookieParser());
 app.use(express.session({
     "secret": "my little secret"
@@ -28,5 +28,5 @@ app.get("/", function(req, res) {
     res.end(a);
 });
 
-app.listen(8080, "code-story-2.dpellier.cloudbees.net");
+app.listen(8085, "code-story-2.dpellier.cloudbees.net");
 console.log("Server running");
