@@ -11,6 +11,7 @@ var answer = function(question, req, res) {
       return "OUI";
       break;
     case "Est ce que tu reponds toujours oui(OUI/NON)":
+    case "As tu bien recu le premier enonce(OUI/NON)":
       return "NON";
       break;
     default:
@@ -28,12 +29,13 @@ app.use(express.session({
 
 // Routing
 app.post("/enonce/:id", function(req, res) {
-  var headers = req.headers,
-      body = req.body;
+  var headers = req.headers;
   
   console.log("New enonce request received - " + new Date().toTimeString());
-  console.log("Headers : " + headers);
-  console.log("Body : " + body);
+  
+  for (header in headers) {
+    console.log(header + " : " + headers[header]);
+  }
   
   res.send(200);
 });
