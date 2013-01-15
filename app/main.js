@@ -10,6 +10,9 @@ var answer = function(question, req, res) {
       case "Es tu pret a recevoir une enonce au format markdown par http post(OUI/NON)":
         return "OUI";
         break;
+      case "Est ce que tu reponds toujours oui(OUI/NON)":
+        return "NON";
+        break;
       default:
         return "I'm sorry but I can't understand the question.";
         break;
