@@ -28,10 +28,14 @@ app.use(express.session({
 
 // Routing
 app.post("/enonce/:id", function(req, res) {
-  var body = req.body;
+  var headers = req.headers,
+      body = req.body;
   
   console.log("New enonce request received - " + new Date().toTimeString());
+  console.log("Headers : " + headers);
   console.log("Body : " + body);
+  
+  res.send(200);
 });
 
 //app.get("/change/:value", function(req, res) {
