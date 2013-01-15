@@ -1,5 +1,5 @@
 var express = require("express"),
-    change = require("./change");
+    change = require("./change.js");
 
 var answer = function(question, req, res) {
   switch(question) {
