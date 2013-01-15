@@ -1,5 +1,4 @@
-var express = require("express"),
-    change = require("./change.js");
+var express = require("express");
 
 var answer = function(question, req, res) {
   switch(question) {
@@ -35,16 +34,16 @@ app.post("/enonce/:id", function(req, res) {
   console.log("Body : " + body);
 });
 
-app.get("/change/:value", function(req, res) {
-  var value = req.params.value;
-  
-  console.log("New change request received - " + new Date().toTimeString());
-  console.log("Value : " + value);
-  
-  var a = change.changeMonade(value);
-  
-  console.log("Answer : ");
-}); 
+//app.get("/change/:value", function(req, res) {
+//  var value = req.params.value;
+//  
+//  console.log("New change request received - " + new Date().toTimeString());
+//  console.log("Value : " + value);
+//  
+//  var a = change.changeMonade(value);
+//  
+//  console.log("Answer : ");
+//}); 
 
 app.get("/", function(req, res) {
   var q = req.param("q");
