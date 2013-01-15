@@ -3,10 +3,13 @@ var express = require("express");
 var answer = function(question, req, res) {
     switch(question) {
       case "Quelle est ton adresse email":
-        return "dpellier@gmail.com"
+        return "dpellier@gmail.com";
+        break;
+      case "Es tu heureux de participer(OUI/NON)":
+        return "OUI";
         break;
       default:
-        return "I'm sorry but I can't understand the question."
+        return "I'm sorry but I can't understand the question.";
         break;
     }
 };
