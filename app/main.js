@@ -8,10 +8,10 @@ var answer = function(question, req, res) {
     case "Es tu heureux de participer(OUI/NON)":
     case "Es tu abonne a la mailing list(OUI/NON)":
     case "Es tu pret a recevoir une enonce au format markdown par http post(OUI/NON)":
+    case "As tu bien recu le premier enonce(OUI/NON)":
       return "OUI";
       break;
     case "Est ce que tu reponds toujours oui(OUI/NON)":
-    case "As tu bien recu le premier enonce(OUI/NON)":
       return "NON";
       break;
     default:
@@ -29,19 +29,11 @@ app.use(express.session({
 
 // Routing
 app.post("/enonce/:id", function(req, res) {
-  var headers = req.headers;
-  
   console.log("New enonce request received - " + new Date().toTimeString());
-  
-//  for (header in headers) {
-//    console.log(header + " : " + headers[header]);
-//  }
-  
-   req.on('data', function(chunk) {
-    
-    console.log("Received body data:");
-    console.log(chunk.toString());
-    
+
+  req.on('data', function(data) {
+    console.log("Enonce : ");
+    console.log(data.toString());
   });
   
   res.send(200);
