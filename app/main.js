@@ -33,9 +33,16 @@ app.post("/enonce/:id", function(req, res) {
   
   console.log("New enonce request received - " + new Date().toTimeString());
   
-  for (header in headers) {
-    console.log(header + " : " + headers[header]);
-  }
+//  for (header in headers) {
+//    console.log(header + " : " + headers[header]);
+//  }
+  
+   req.on('data', function(chunk) {
+    
+    console.log("Received body data:");
+    console.log(chunk.toString());
+    
+  });
   
   res.send(200);
 });
