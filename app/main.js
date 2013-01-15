@@ -6,6 +6,7 @@ var answer = function(question, req, res) {
         return "dpellier@gmail.com";
         break;
       case "Es tu heureux de participer(OUI/NON)":
+      case "Es tu abonne a la mailing list(OUI/NON)":
         return "OUI";
         break;
       default:
