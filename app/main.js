@@ -39,16 +39,16 @@ app.post("/enonce/:id", function(req, res) {
   res.send(200);
 });
 
-//app.get("/change/:value", function(req, res) {
-//  var value = req.params.value;
-//  
-//  console.log("New change request received - " + new Date().toTimeString());
-//  console.log("Value : " + value);
-//  
-//  var a = change.changeMonade(value);
-//  
-//  console.log("Answer : ");
-//}); 
+app.get("/change/:value", function(req, res) {
+  var value = req.params.value;
+  
+  console.log("New change request received - " + new Date().toTimeString());
+  console.log("Value : " + value);
+  
+  var a = change.changeMonade(value);
+  
+  res.send(404);
+}); 
 
 app.get("/", function(req, res) {
   var q = req.param("q");
