@@ -7,6 +7,7 @@ var answer = function(question, req, res) {
         break;
       case "Es tu heureux de participer(OUI/NON)":
       case "Es tu abonne a la mailing list(OUI/NON)":
+      case "Es tu pret a recevoir une enonce au format markdown par http post(OUI/NON)":
         return "OUI";
         break;
       default:
