@@ -47,7 +47,9 @@ app.get("/change/:value", function(req, res) {
   
   var a = change.changeMonade(value);
   
-  res.send(404);
+  console.log("Result : " + a);
+  
+  res.end(a);
 }); 
 
 app.get("/", function(req, res) {
