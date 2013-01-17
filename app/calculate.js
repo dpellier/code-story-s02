@@ -2,9 +2,9 @@
  * Main method
  */
 var calculate = function(expr) {
-
+  expr = expr.replace(/\s/g, "+");
   if (!/[^0-9\+\-\*\/\(\)\s]/g.test(expr)) {
-    return eval(expr);
+    return eval(expr).toString().replace(/\./g, ",");
   }
 
   // We transform the expression to a postfix expression, easier to resolve;
