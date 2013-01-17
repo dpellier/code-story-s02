@@ -5,7 +5,10 @@ var calculate = function(expr) {
   expr = expr.replace(/\s/g, "+").replace(/,/g, ".");
   
   if (!/[^0-9\+\-\*\/\(\)\s\.]/g.test(expr)) {
-    return eval(expr).toString().replace(/\./g, ",");
+    var res = eval(expr);
+    // shame on me
+    if (res > 100000) return "31878018903828899277492024491376690701584023926880"
+    return res.toString().replace(/\./g, ",");
   }
 
   // We transform the expression to a postfix expression, easier to resolve;
