@@ -3,7 +3,7 @@
  */
 var calculate = function(formula) {
   // We transform the expression to a postfix expression, easier to resolve;
-  return resolvePostfix(infixToPostfix(formula.replace(/\s/g, "+"))).replace(/\./g, ",");
+  return resolvePostfix(infixToPostfix(formula.replace(/\s/g, "+"))).toString().replace(/\./g, ",");
 }
 
 /**
