@@ -38,7 +38,7 @@ var decomposeRoot = function(coin, initialValue, idx) {
   
     // Check each lesser coin combination
     for (var i=idx+1; i < coins.length; i++) {
-      addResults(coin.name, coinNb, decompose(coins[i], mod, idx));
+      addResults(coin.name, coinNb, decompose(coins[i], mod, i));
     }
     
     scale += coin.value;
