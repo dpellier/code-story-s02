@@ -13,6 +13,9 @@ var answer = function(question, req, res) {
     case "As tu bien recu le premier enonce(OUI/NON)":
       return "OUI";
       break;
+    case "As tu passe une bonne nuit malgre les bugs de l etape precedente(PAS_TOP/BOF/QUELS_BUGS)":
+      return "QUELS_BUGS";
+      break;
     case "Est ce que tu reponds toujours oui(OUI/NON)":
       return "NON";
       break;
@@ -55,10 +58,10 @@ app.get("/scalaskel/change/:value", function(req, res) {
 }); 
 
 app.get("/", function(req, res) {
-  //var q = req.param("q");
-  var q = req.query.q;
-  //var a = answer(q, req, res);
-  var a = calc.calculate(q);
+  var q = req.param("q");
+  //var q = req.query.q;
+  var a = answer(q, req, res);
+  //var a = calc.calculate(q);
 
   console.log("New request received - " + new Date().toTimeString());
   console.log("Question : " + q);
