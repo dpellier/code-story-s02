@@ -38,7 +38,7 @@ var decomposeRoot = function(coin, initialValue, idx) {
   
     // Check each lesser coin combination
     for (var i=idx+1; i < coins.length; i++) {
-      addResults(coin.name, coinNb, decompose(coins[i], mod));
+      addResults(coin.name, coinNb, decompose(coins[i], mod, idx));
     }
     
     scale += coin.value;
@@ -48,7 +48,7 @@ var decomposeRoot = function(coin, initialValue, idx) {
 /**
  * Find all combination with a lesser coin
  */
-var decompose = function(coin, mod) {
+var decompose = function(coin, mod, idx) {
   var scale = coin.value;
   var result = [];
   
@@ -57,6 +57,14 @@ var decompose = function(coin, mod) {
     
     if (newMod >= 0) {
       result.push(associate(colon(coin.name, scale/coin.value), colon(FOO.name, newMod)));
+    }
+    
+    // Check each lesser coin combination
+    for (var i=idx+1; i < coins.length; i++) {
+      var less = decompose(coins[i], newMod, i);
+      for (l in less) {
+        result.push(associate(colon(coin.name, scale/coin.value), less[l]));
+      }
     }
     
     scale += coin.value;
