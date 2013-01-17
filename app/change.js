@@ -55,7 +55,7 @@ var decompose = function(coin, mod) {
   while(mod >= scale) {
     var newMod = mod - scale;
     
-    if (newMod > 0) {
+    if (newMod >= 0) {
       result.push(associate(colon(coin.name, scale/coin.value), colon(FOO.name, newMod)));
     }
     
