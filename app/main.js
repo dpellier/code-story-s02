@@ -45,6 +45,17 @@ app.post("/enonce/:id", function(req, res) {
   res.send(200);
 });
 
+app.post("/jajascript/optimize", function(req, res) {
+  console.log("New enonce request received - " + new Date().toTimeString());
+
+  req.on('data', function(data) {
+    console.log("Reservation : ");
+    console.log(data.toString());
+  });
+  
+  res.send(404);
+});
+
 app.get("/scalaskel/change/:value", function(req, res) {
   var value = req.params.value;
   
