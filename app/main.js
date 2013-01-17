@@ -11,6 +11,7 @@ var answer = function(question, req, res) {
     case "Es tu abonne a la mailing list(OUI/NON)":
     case "Es tu pret a recevoir une enonce au format markdown par http post(OUI/NON)":
     case "As tu bien recu le premier enonce(OUI/NON)":
+    case "As tu bien recu le second enonce(OUI/NON)":
       return "OUI";
       break;
     case "As tu passe une bonne nuit malgre les bugs de l etape precedente(PAS_TOP/BOF/QUELS_BUGS)":
