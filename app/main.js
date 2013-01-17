@@ -1,32 +1,6 @@
 var express = require("express");
 var change = require("./change.js");
-
-var calculate = function(formula) {
-  if (formula.search(/\*/g) > 0) return multiply(formula);
-  if (formula.search(/\-/g) > 0) return soustract(formula);
-  if (formula.search(/\//g) > 0) return divide(formula);
-  return add(formula);
-}
-
-var add = function(formula) {
-  var nbs = formula.split(" ");
-  return Number(nbs[0]) + Number(nbs[1]);
-}
-
-var multiply = function(formula) {
-  var nbs = formula.split("*");
-  return Number(nbs[0]) * Number(nbs[1]);
-}
-
-var soustract = function(formula) {
-  var nbs = formula.split("-");
-  return Number(nbs[0]) - Number(nbs[1]);
-}
-
-var divide = function(formula) {
-  var nbs = formula.split("/");
-  return Number(nbs[0]) / Number(nbs[1]);
-}
+var calc = require("./calculate.js");
 
 var answer = function(question, req, res) {
   switch(question) {
@@ -84,7 +58,7 @@ app.get("/", function(req, res) {
   //var q = req.param("q");
   var q = req.query.q;
   //var a = answer(q, req, res);
-  var a = calculate(q);
+  var a = calc.calculate(q);
 
   console.log("New request received - " + new Date().toTimeString());
   console.log("Question : " + q);
