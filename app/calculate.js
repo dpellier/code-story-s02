@@ -1,9 +1,14 @@
 /**
  * Main method
  */
-var calculate = function(formula) {
+var calculate = function(expr) {
+
+  if (!/[^0-9\+\-\*\/\(\)\s]/g.test(expr)) {
+    return eval(expr);
+  }
+
   // We transform the expression to a postfix expression, easier to resolve;
-  return resolvePostfix(infixToPostfix(formula.replace(/\s/g, "+"))).toString().replace(/\./g, ",");
+  //return resolvePostfix(infixToPostfix(formula.replace(/\s/g, "+"))).toString().replace(/\./g, ",");
 }
 
 /**
