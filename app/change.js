@@ -20,7 +20,7 @@ var changeMonade = function(initialValue) {
   // Add minimal response, the value itself
   addResponse(colon(FOO.name, initialValue));
   
-  return response;
+  return "[" + response.toString() + "]";
 }
 
 /**
