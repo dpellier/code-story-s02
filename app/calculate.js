@@ -58,7 +58,14 @@ var resolvePostfix = function(postfixStr) {
       var left = pop_stack(stackArr);
       push_stack(stackArr, resolve(left, right, postfixStr[i]));
     } else if (isOperand(postfixStr[i])) {
-      push_stack(stackArr, postfixStr[i]);
+      var j = i + 1,
+          toStack = postfixStr[i];
+      while (j < postfixStr.length && isOperand(postfixStr[j])) {
+        toStack += postfixStr[j];
+        j++;
+        i++;
+      }
+      push_stack(stackArr, toStack);
     }
   }
   return stackArr[0];
