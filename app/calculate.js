@@ -20,11 +20,18 @@ var infixToPostfix = function(infixStr) {
       postfixStr[postfixPtr] = infixStr[i];
       postfixPtr++;
     } else {
+      postfixStr[postfixPtr] = " ";
+      postfixPtr++;
+      
       while ((!isEmpty(stackArr)) && (prcd(topStack(stackArr),infixStr[i]))) {
         postfixStr[postfixPtr] = topStack(stackArr);
         pop_stack(stackArr);
         postfixPtr++;
+        
+        postfixStr[postfixPtr] = " ";
+        postfixPtr++;
       }
+      
       if ((!isEmpty(stackArr)) && (infixStr[i] == ")")) {
         pop_stack(stackArr);
       } else {
@@ -34,8 +41,12 @@ var infixToPostfix = function(infixStr) {
   }
   
   while (!isEmpty(stackArr)) {
+    postfixStr[postfixStr.length] = " ";
+
     postfixStr[postfixStr.length] = topStack(stackArr);
     pop_stack(stackArr);
+    
+    postfixStr[postfixStr.length] = " ";
   }
   var returnVal = '';
   for (var i=0; i<postfixStr.length; i++) {
@@ -94,15 +105,15 @@ var pop_stack = function(stackArr) {
 }
 
 var isOperand = function(who) {
-  return !isOperator(who) ? true : false;
+  return /[0-9]/g.test(who);
 }
 
 var isOperator = function(who) {
-  return (who == "+" || who == "-" || who == "*" || who == "/" || who == "(" || who == ")") ? true : false;
+  return /[\+\-\*\/\(\)]/g.test(who);
 }
 
 var isBasicOperator = function(who) {
-  return (who == "+" || who == "-" || who == "*" || who == "/") ? true : false;
+  return /[\+\-\*\/]/g.test(who);
 }
 
 var topStack = function(stackArr) {
