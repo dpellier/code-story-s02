@@ -73,7 +73,7 @@ app.get("/", function(req, res) {
   console.log("Question : " + q);
   console.log("Answer : " + a);
 
-  res.end(a);
+  res.end(a.toString());
 });
 
 app.listen(process.env.PORT);
