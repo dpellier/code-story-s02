@@ -4,7 +4,6 @@
     "author": "Damien Pellier dpellier@gmail.com",
     "description": "Application for the code story challenge 2013",
     "dependencies" : {
-        "express": "latest",
-        "nodeunit": "latest"
+        "express": "latest"
     }
 }
