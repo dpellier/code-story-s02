@@ -2,8 +2,9 @@
  * Main method
  */
 var calculate = function(expr) {
-  expr = expr.replace(/\s/g, "+");
-  if (!/[^0-9\+\-\*\/\(\)\s]/g.test(expr)) {
+  expr = expr.replace(/\s/g, "+").replace(/,/g, ".");
+  
+  if (!/[^0-9\+\-\*\/\(\)\s\.]/g.test(expr)) {
     return eval(expr).toString().replace(/\./g, ",");
   }
 
