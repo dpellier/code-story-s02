@@ -1,6 +1,16 @@
 var express = require("express");
 var change = require("./change.js");
 
+var calculate = function(formula) {
+  var nbs = formula.split(" "),
+      result = 0;
+  for (i in nbs) {
+    result += Number(nbs[i]);
+  }
+  
+  return result;
+}
+
 var answer = function(question, req, res) {
   switch(question) {
     case "Quelle est ton adresse email":
@@ -54,8 +64,10 @@ app.get("/scalaskel/change/:value", function(req, res) {
 }); 
 
 app.get("/", function(req, res) {
-  var q = req.param("q");
-  var a = answer(q, req, res);
+  //var q = req.param("q");
+  var q = req.query.q;
+  //var a = answer(q, req, res);
+  var a = calculate(q);
 
   console.log("New request received - " + new Date().toTimeString());
   console.log("Question : " + q);
