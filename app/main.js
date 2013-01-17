@@ -9,39 +9,23 @@ var calculate = function(formula) {
 }
 
 var add = function(formula) {
-  var nbs = formula.split(" "),
-      result = 0;
-  for (i in nbs) {
-    result += Number(nbs[i]);
-  }
-  return result;
+  var nbs = formula.split(" ");
+  return Number(nbs[0]) + Number(nbs[1]);
 }
 
 var multiply = function(formula) {
-  var nbs = formula.split("*"),
-      result = 0;
-  for (i in nbs) {
-    result *= Number(nbs[i]);
-  }
-  return result;
+  var nbs = formula.split("*");
+  return Number(nbs[0]) * Number(nbs[1]);
 }
 
 var soustract = function(formula) {
-  var nbs = formula.split("-"),
-      result = 0;
-  for (i in nbs) {
-    result -= Number(nbs[i]);
-  }
-  return result;
+  var nbs = formula.split("-");
+  return Number(nbs[0]) - Number(nbs[1]);
 }
 
 var divide = function(formula) {
-  var nbs = formula.split("/"),
-      result = 0;
-  for (i in nbs) {
-    result /= Number(nbs[i]);
-  }
-  return result;
+  var nbs = formula.split("/");
+  return Number(nbs[0]) / Number(nbs[1]);
 }
 
 var answer = function(question, req, res) {
