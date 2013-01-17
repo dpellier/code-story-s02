@@ -13,6 +13,7 @@ String.prototype.trim = function() { return this.replace(/^\s+|\s+$/g, ''); };
  * Main method
  */
 var changeMonade = function(initialValue) {
+  response = [];
   for (var i=0; i < coins.length; i++) {
     decomposeRoot(coins[i], initialValue, i);
   }
