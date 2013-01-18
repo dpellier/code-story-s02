@@ -3,19 +3,13 @@ var FLIES = [];
 /**
  * Main method
  */
-var optimize = function() {
-  //var flies = JSON.parse(data);
-  var data = [
-        { "VOL": "MONAD42", "DEPART": 0, "DUREE": 5, "PRIX": 10 },
-        { "VOL": "META18", "DEPART": 3, "DUREE": 7, "PRIX": 14 },
-        { "VOL": "LEGACY01", "DEPART": 5, "DUREE": 9, "PRIX": 8 },
-        { "VOL": "YAGNI17", "DEPART": 5, "DUREE": 9, "PRIX": 7 }
-    ];
+var optimize = function(data) {
   
   // Sort the flies by departure and duration
-  FLIES = data.sort(function(a, b) {
+  FLIES = JSON.parse(data).sort(function(a, b) {
     return a.DEPART == b.DEPART ? a.DUREE - b.DUREE : a.DEPART - b.DEPART;
   });
+  console.log("FLIES : " + FLIES);
   
   // Preparing parallel search
   var researches = [];
@@ -35,11 +29,7 @@ var optimize = function() {
  * Get all path from one specific fly
  */
 var getPath = function(startFly, callback) {
-  console.log("Get Path fly : " + startFly.VOL);
-
   possiblePaths = getDeepPath(startFly, startFly.DEPART, []);
-  console.log(startFly.VOL + " -> " + possiblePaths.toString());
-  
   callback(possiblePaths);
 }
 
@@ -68,8 +58,7 @@ var getDeepPath = function(startFly, startTime, fullPaths) {
 
 // Return the best gain of each possible paths
 var filterBestPath = function(possiblePaths) {
-  //return possiblePaths.sort(function(a, b) { return b.gain - a.gain; })[0];
-  console.log("toto");
+  return possiblePaths.sort(function(a, b) { return b.gain - a.gain; })[0];
 }
 
 // Keep only possible match
