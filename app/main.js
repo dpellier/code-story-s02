@@ -49,12 +49,12 @@ app.post("/enonce/:id", function(req, res) {
 app.post("/jajascript/optimize", function(req, res) {
   console.log("New enonce request received - " + new Date().toTimeString());
 
+  var a = "";
   req.on('data', function(data) {
     console.log("Reservation : ");
     console.log(data.toString());
+    a = jajascript.optimize(data.toString());
   });
-  
-  var a = jajascript.optimize(data.toString());
   
   console.log("Result : " + a);
   
