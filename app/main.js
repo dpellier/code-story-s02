@@ -1,6 +1,7 @@
 var express = require("express");
 var change = require("./change.js");
 var calc = require("./calculate.js");
+var jajascript = require("./jajascript.js");
 
 var answer = function(question, req, res) {
   switch(question) {
@@ -52,6 +53,10 @@ app.post("/jajascript/optimize", function(req, res) {
     console.log("Reservation : ");
     console.log(data.toString());
   });
+  
+  var a = jajascript.optimize(data.toString());
+  
+  console.log("Result : " + a);
   
   res.send(404);
 });
