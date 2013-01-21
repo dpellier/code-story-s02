@@ -58,7 +58,7 @@ app.post("/jajascript/optimize", function(req, res) {
   
   console.log("Result : " + a);
   
-  res.send(404);
+  res.end(a);
 });
 
 app.get("/scalaskel/change/:value", function(req, res) {

@@ -5,7 +5,7 @@ var FLIES = [];
  * Main method
  */
 var optimize = function(data) {
-  
+  var bestPath = "";
   // Sort the flies by departure and duration
   FLIES = JSON.parse(data).sort(function(a, b) {
     return a.DEPART == b.DEPART ? a.DUREE - b.DUREE : a.DEPART - b.DEPART;
@@ -15,23 +15,15 @@ var optimize = function(data) {
   // Preparing parallel search
   var researches = [];
   for (idx in FLIES) {
-    var search = makeCallbackFunc(FLIES[idx]);
-    researches.push(search(filterBestPath));
+    var search = makeSearchFunction(FLIES[idx]);
+    researches.push(search);
   }
   
   // Make a search for each fly in parallel
-  async.parallel(researches, function(err, result) {
-
-    console.log("Fin : " + result);
+  async.parallel(researches, function(err, results) {
+    bestPath = filterBestPath(results);
   });
-}
-
-/**
- * Get all path from one specific fly
- */
-var getPath = function(startFly, callback) {
-  possiblePaths = getDeepPath(startFly, startFly.DEPART, []);
-  callback(possiblePaths);
+  return bestPath;
 }
 
 /**
@@ -76,10 +68,11 @@ var addFlyValueToArray = function(fly, array) {
   });
 }
 
-// Create a function with callback to pass to the parallel call
-function makeCallbackFunc(fly) {
+// Create a function with callback to pass to the parallel call to get all path from one specific fly
+function makeSearchFunction(fly) {
   return function (callback) {
-    getPath(fly, callback);
+    possiblePaths = getDeepPath(fly, fly.DEPART, []);
+    callback(null, filterBestPath(possiblePaths));
   };
 }
 
