@@ -19,6 +19,7 @@ var answer = function(question, req, res) {
       return "QUELS_BUGS";
       break;
     case "Est ce que tu reponds toujours oui(OUI/NON)":
+    case "As tu copie le code de ndeloof(OUI/NON/JE_SUIS_NICOLAS)":
       return "NON";
       break;
     default:
