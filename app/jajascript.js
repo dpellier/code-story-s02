@@ -22,7 +22,7 @@ var optimize = function(data) {
   async.parallel(researches, function(err, results) {
     bestPath = filterBestPath(results);
   });
-  return bestPath;
+  return JSON.stringify(bestPath);
 }
 
 /**
