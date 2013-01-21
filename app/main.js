@@ -53,7 +53,7 @@ app.post("/jajascript/optimize", function(req, res) {
   req.on('data', function(data) {
     console.log("Reservation : ");
     console.log(data.toString());
-    a = jajascript.optimize(data.toString());
+    a = jajascript.optimize(data.toString()).toString();
     
     console.log("Result : " + a);
     res.end(a);

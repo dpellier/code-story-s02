@@ -10,7 +10,6 @@ var optimize = function(data) {
   FLIES = JSON.parse(data).sort(function(a, b) {
     return a.DEPART == b.DEPART ? a.DUREE - b.DUREE : a.DEPART - b.DEPART;
   });
-  console.log("FLIES : " + FLIES);
   
   // Preparing parallel search
   var researches = [];
