@@ -28,14 +28,13 @@ var optimize = function(data) {
 /**
  * Recursive function to get each path from a starting fly
  */
-var getDeepPath = function(startFly, startTime, fullPaths) {
-  var newStart = startTime + startFly.DUREE,
-      nextFlies = filterFlies(newStart);
+var getDeepPath = function(startFly, fullPaths) {
+  var nextFlies = filterFlies(startFly.DEPART + startFly.DUREE);
   
   // If we found some other matching fly
   if (nextFlies.length) {
     for (i in nextFlies) {
-      fullPaths = getDeepPath(nextFlies[i], newStart, fullPaths);
+      fullPaths = getDeepPath(nextFlies[i], fullPaths);
     }
     
     // Add the fly value to all flies solutions
@@ -70,7 +69,7 @@ var addFlyValueToArray = function(fly, array) {
 // Create a function with callback to pass to the parallel call to get all path from one specific fly
 function makeSearchFunction(fly) {
   return function (callback) {
-    possiblePaths = getDeepPath(fly, fly.DEPART, []);
+    possiblePaths = getDeepPath(fly, []);
     callback(null, filterBestPath(possiblePaths));
   };
 }
