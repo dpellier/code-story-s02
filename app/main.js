@@ -54,11 +54,10 @@ app.post("/jajascript/optimize", function(req, res) {
     console.log("Reservation : ");
     console.log(data.toString());
     a = jajascript.optimize(data.toString());
+    
+    console.log("Result : " + a);
+    res.end(a);
   });
-  
-  console.log("Result : " + a);
-  
-  res.end(a);
 });
 
 app.get("/scalaskel/change/:value", function(req, res) {
