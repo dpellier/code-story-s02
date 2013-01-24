@@ -8,7 +8,7 @@ var calculate = function(expr) {
  
     var res = eval(expr);
     
-    if (res > Number.MAX_VALUE) {
+    if (res.toString().indexOf("e") > 0) {
       res = new bigdecimal.BigDecimal(eval(expr));
     }
     
