@@ -6,7 +6,7 @@ var bigdecimal = require("bigdecimal");
 var calculate = function(expr) {
   expr = expr.replace(/\s/g, "+").replace(/,/g, ".");
  
-    var res = new bigdecimal.BigDecimal(eval(expr));
+    var res = new bigdecimal.BigDecimal(eval(expr)).stripTrailingZeros();
     // shame on me
     //if (res > 100000) return "31878018903828899277492024491376690701584023926880"
     return res.toString().replace(/\./g, ",");
