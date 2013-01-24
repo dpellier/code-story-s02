@@ -5,6 +5,7 @@
     "description": "Application for the code story challenge 2013",
     "dependencies" : {
         "express": "latest",
-        "async": "latest"
+        "async": "latest",
+        "bigdecimal": "latest"
     }
 }
