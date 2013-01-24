@@ -3,7 +3,7 @@ var change = require("./change.js");
 var calc = require("./calculate.js");
 var jajascript = require("./jajascript.js");
 
-var answer = function(question, req, res) {
+var answer = function(question) {
   switch(question) {
     case "Quelle est ton adresse email":
       return "dpellier@gmail.com";
@@ -75,10 +75,10 @@ app.get("/scalaskel/change/:value", function(req, res) {
 }); 
 
 app.get("/", function(req, res) {
-  var q = req.param("q");
-  //var q = req.query.q;
-  var a = answer(q, req, res);
-  //var a = calc.calculate(q);
+  var q = req.param("q"),
+      a = "";
+  
+  /^[0-9\(\),\s\*\/-]+$/gi.test(q) ? a = calc.calculate(q) : a = answer(q);
 
   console.log("New request received - " + new Date().toTimeString());
   console.log("Question : " + q);
