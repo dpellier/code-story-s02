@@ -1,7 +1,7 @@
 var express = require("express");
 var change = require("./change.js");
 var calc = require("./calculate.js");
-var jajascript = require("./jajascript.js");
+var jajascript = require("./jajascript_v2.js");
 
 var answer = function(question) {
   switch(question) {

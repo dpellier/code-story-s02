@@ -1,80 +1,76 @@
-var async = require("async");
-var FLIES = [];
+var FINAL = {gain: 0, path: []};
 
 /**
  * Main method
  */
 var optimize = function(data) {
-  var bestPath = "";
-  // Sort the flies by departure and duration
-  //FLIES = JSON.parse(data).sort(function(a, b) {
-  //  return a.DEPART == b.DEPART ? a.DUREE - b.DUREE : a.DEPART - b.DEPART;
-  //});
   
-  // We filter the data to work only on possible flies
+  var flies = JSON.parse(data);
   
+  // Array of object {gain: x, path: [a, b], pathValues: [[0, 2], [3, 6]]}
+  var previous = [];
   
-  // pour chaque vol, on ne garde que les chemins possibles 
-  
-  // TODO ne pas remonter tous les resultats en fin de deep path mais verifier s'il est meilleur que le meilleur actuel
-  
-  
-  // Preparing parallel search
-  var researches = [];
-  for (idx in FLIES) {
-    var search = makeSearchFunction(FLIES[idx]);
-    researches.push(search);
+  for (i in flies) {
+    var fly = flies[i];
+    
+    // Check compatibility with all previous combination
+    previous.forEach(function(prev) {
+      // We check if the path is correct
+      if (!fitInPath(fly, prev)) {
+        return;
+      }
+
+      // Still okay, so we create a new combination
+      var newComb = {gain: prev.gain + fly.PRIX, path: prev.path.clone(), pathValues: prev.pathValues.clone()};
+      newComb.path.push(fly.VOL);
+      newComb.pathValues.push([fly.DEPART, fly.DEPART + fly.DUREE]);
+      previous.push(newComb);
+
+      // We check if the new solution is the new best
+      if (newComb.gain > FINAL.gain) {
+        FINAL.gain = newComb.gain;
+        FINAL.path = newComb.path;
+      }
+    });
+    
+    // We add the new possibility with this fly alone
+    previous.push({gain: fly.PRIX, path: [fly.VOL], pathValues: [[fly.DEPART, fly.DEPART + fly.DUREE]]});
   }
   
-  // Make a search for each fly in parallel
-  async.parallel(researches, function(err, results) {
-    bestPath = filterBestPath(results);
-  });
-  return JSON.stringify(bestPath);
+  // Special case if we have only one fly
+  if (FINAL.gain == 0) {
+    return JSON.stringify({gain: previous[0].gain, path: previous[0].path});
+  }
+  
+  return JSON.stringify(FINAL);
 }
 
 /**
- * Recursive function to get each path from a starting fly
+ * Check if the fly can be inserted in the current combination
  */
-var getDeepPath = function(startFly, fullPaths) {
-  var nextFlies = filterFlies(startFly.DEPART + startFly.DUREE);
-  
-  // If we found some other matching fly
-  if (nextFlies.length) {
-    for (i in nextFlies) {
-      var respSize = fullPaths.length;
-      fullPaths = getDeepPath(nextFlies[i], fullPaths);
-      
-      // Add the fly value to the new solutions
-      for (var j=respSize; j < fullPaths.length; j++) {
-        fullPaths[j].gain += startFly.PRIX;
-        fullPaths[j].path.push(startFly.VOL);
-      }
-    }
-  } else {
-    // We reach the end of the search we add the new path to the list
-    fullPaths.push({gain: startFly.PRIX, path: [startFly.VOL]});
+var fitInPath = function(fly, prev) {
+  var duration = [fly.DEPART, fly.DEPART + fly.DUREE];
+
+  // Return false if we find a value that is already in the fly interval
+  return !prev.pathValues.some(function(interval) {
+    return intersection(duration, interval);
+  });
+}
+
+/**
+ * Find if two array have an intersection
+ */
+var intersection = function(a, b) {
+  return (a[0] >= b[0] && a[0] < b[1]) ||	(a[1] > b[0] && a[1] <= b[1]) || (a[0] <= b[0] && a[1] >= b[1]);
+}
+
+Object.prototype.clone = function() {
+  var newObj = (this instanceof Array) ? [] : {};
+  for (i in this) {
+    if (i == 'clone') continue;
+    if (this[i] && typeof this[i] == "object") {
+      newObj[i] = this[i].clone();
+    } else newObj[i] = this[i]
   }
-
-  return fullPaths;
-}
-
-// Return the best gain of each possible paths
-var filterBestPath = function(possiblePaths) {
-  return possiblePaths.sort(function(a, b) { return b.gain - a.gain; })[0];
-}
-
-// Keep only possible match
-var filterFlies = function(startValue) {
-  return FLIES.filter(function(next) { return next.DEPART >= startValue; });
-}
-
-// Create a function with callback to pass to the parallel call to get all path from one specific fly
-function makeSearchFunction(fly) {
-  return function (callback) {
-    possiblePaths = getDeepPath(fly, []);
-    callback(null, filterBestPath(possiblePaths));
-  };
-}
-
-exports.optimize = optimize;
+  return newObj;
+};
