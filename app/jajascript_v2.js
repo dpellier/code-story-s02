@@ -74,3 +74,5 @@ Object.prototype.clone = function() {
   }
   return newObj;
 };
+
+exports.optimize = optimize;
