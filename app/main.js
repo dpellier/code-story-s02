@@ -35,6 +35,11 @@ app.use(express.session({
   "secret": "my little secret"
 }));
 
+app.use(function(err, req, res, next){
+  console.error(err.stack);
+  res.send(500, 'Something broke!');
+});
+
 // Routing
 app.post("/enonce/:id", function(req, res) {
   console.log("New enonce request received - " + new Date().toTimeString());
