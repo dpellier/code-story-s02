@@ -1,10 +1,10 @@
-var FINAL = {gain: 0, path: []};
+var FINAL = {};
 
 /**
  * Main method
  */
 var optimize = function(data) {
-  
+  FINAL = {gain: 0, path: []};
   var flies = JSON.parse(data);
   
   // Array of object {gain: x, path: [a, b], pathValues: [[0, 2], [3, 6]]}
