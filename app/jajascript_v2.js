@@ -27,21 +27,15 @@ var optimize = function(data) {
       previous.push(newComb);
 
       // We check if the new solution is the new best
-      if (newComb.gain > FINAL.gain) {
-        FINAL.gain = newComb.gain;
-        FINAL.path = newComb.path;
-      }
+      checkFinal(newComb);
     });
     
     // We add the new possibility with this fly alone
-    previous.push({gain: fly.PRIX, path: [fly.VOL], pathValues: [[fly.DEPART, fly.DEPART + fly.DUREE]]});
+    var alone = {gain: fly.PRIX, path: [fly.VOL], pathValues: [[fly.DEPART, fly.DEPART + fly.DUREE]]};
+    previous.push(alone);
+    checkFinal(alone);
   }
-  
-  // Special case if we have only one fly
-  if (FINAL.gain == 0) {
-    return JSON.stringify({gain: previous[0].gain, path: previous[0].path});
-  }
-  
+
   return JSON.stringify(FINAL);
 }
 
@@ -55,6 +49,16 @@ var fitInPath = function(fly, prev) {
   return !prev.pathValues.some(function(interval) {
     return intersection(duration, interval);
   });
+}
+
+/**
+ * Check and update the best combination
+ */
+var checkFinal = function(comb) {
+  if (comb.gain > FINAL.gain) {
+    FINAL.gain = comb.gain;
+    FINAL.path = comb.path;
+  }
 }
 
 /**
